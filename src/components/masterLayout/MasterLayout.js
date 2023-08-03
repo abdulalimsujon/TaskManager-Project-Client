@@ -1,10 +1,11 @@
 import React, { Fragment, useRef } from 'react';
-import { Container, NavLink, Navbar } from 'react-bootstrap';
+import { Container, Navbar } from 'react-bootstrap';
 import logo from "../../assets/images/logo.svg"
 import {BsHourglass, BsListNested} from "react-icons/bs";
-// import {MdOutlineCancelPresentation, RiDashboardLine} from "react-icons/all";
+//  import {MdOutlineCancelPresentation, RiDashboardLine} from "react-icons/all";
 
 import {AiOutlineCheckCircle, AiOutlineEdit, AiOutlineLogout, AiOutlineMenuUnfold, AiOutlineUser} from "react-icons/ai";
+import { NavLink } from 'react-router-dom';
 
 const MasterLayout = (props) => {
 
@@ -15,7 +16,7 @@ const MasterLayout = (props) => {
         let sideNav = sideNavRef;
         let content = contentRef;
 
-        console.log(sideNav.classList)
+        
 
         if (sideNav.classList.contains("side-nav-open")) {
             sideNav.classList.add("side-nav-close");
@@ -50,7 +51,7 @@ const MasterLayout = (props) => {
                                   
                                     <hr className="user-dropdown-divider  p-0"/>
                                 </div>
-                                <NavLink to="/Profile" className="side-bar-item">
+                                <NavLink to="/profile" className="side-bar-item">
                                     <AiOutlineUser className="side-bar-item-icon" />
                                     <span className="side-bar-item-caption">Profile</span>
                                 </NavLink>
@@ -70,32 +71,32 @@ const MasterLayout = (props) => {
 
  <div ref={(div) =>{sideNavRef=div}} className="side-nav-open">
 
-<NavLink   className={(navData) => navData.isActive ? "side-bar-item-active side-bar-item mt-2" : "side-bar-item mt-2" }  to="/"  end>
+<NavLink className={(navData) => navData.isActive ? "side-bar-item-active side-bar-item mt-2" : "side-bar-item mt-2" }  to="/"  end>
     {/* <RiDashboardLine className="side-bar-item-icon" /> */}
     <span className="side-bar-item-caption">Dashboard</span>
 </NavLink>
 
-<NavLink className={(navData) => navData.isActive ? "side-bar-item-active side-bar-item mt-2" : "side-bar-item mt-2" } to="/Create" >
+<NavLink className={(navData) => navData.isActive ? "side-bar-item-active side-bar-item mt-2" : "side-bar-item mt-2" } to="/create" >
     <AiOutlineEdit className="side-bar-item-icon" />
     <span className="side-bar-item-caption">Create New</span>
 </NavLink>
 
-<NavLink className={(navData) => navData.isActive ? "side-bar-item-active side-bar-item mt-2" : "side-bar-item mt-2" } to="/All" >
+<NavLink className={(navData) => navData.isActive ? "side-bar-item-active side-bar-item mt-2" : "side-bar-item mt-2" } to="/new" >
     <BsListNested className="side-bar-item-icon" />
     <span className="side-bar-item-caption">New Task</span>
 </NavLink>
 
-<NavLink className={(navData) => navData.isActive ? "side-bar-item-active side-bar-item mt-2" : "side-bar-item mt-2" } to="/Progress" >
+<NavLink className={(navData) => navData.isActive ? "side-bar-item-active side-bar-item mt-2" : "side-bar-item mt-2" } to="/progress" >
     <BsHourglass className="side-bar-item-icon" />
     <span className="side-bar-item-caption">In Progress</span>
 </NavLink>
 
-<NavLink className={(navData) => navData.isActive ? "side-bar-item-active side-bar-item mt-2" : "side-bar-item mt-2" }  to="/Completed" >
+<NavLink className={(navData) => navData.isActive ? "side-bar-item-active side-bar-item mt-2" : "side-bar-item mt-2" }  to="/complete" >
     <AiOutlineCheckCircle className="side-bar-item-icon" />
     <span className="side-bar-item-caption">Completed</span>
 </NavLink>
 
-<NavLink className={(navData) => navData.isActive ? "side-bar-item-active side-bar-item mt-2" : "side-bar-item mt-2" }  to="/Canceled" >
+<NavLink className={(navData) => navData.isActive ? "side-bar-item-active side-bar-item mt-2" : "side-bar-item mt-2" }  to="/cancel" >
     {/* <MdOutlineCancelPresentation className="side-bar-item-icon" /> */}
     <span className="side-bar-item-caption">Canceled</span>
 </NavLink>

@@ -1,15 +1,17 @@
 import React, { Fragment, Suspense, lazy } from 'react';
 import MasterLayout from '../components/masterLayout/MasterLayout';
 import LazyLoader from '../components/masterLayout/LazyLoader';
-const Complete = lazy(()=>import('../components/Complete/Complete'))
+const New = lazy(()=>import('../components/new/New.js'))
 
-const CompletePage = () => {
+
+const Newpage = () => {
     return (
-        <Fragment>
+        <Fragment >
             <MasterLayout>
-                <Suspense fallback ={LazyLoader}>
 
-                <Complete></Complete>
+                <Suspense fallback ={LazyLoader}>
+                <New></New>
+             
 
                 </Suspense>
                
@@ -18,4 +20,4 @@ const CompletePage = () => {
     );
 };
 
-export default CompletePage;
+export default Newpage;

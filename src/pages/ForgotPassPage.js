@@ -1,15 +1,15 @@
-import React, { Fragment, Suspense, lazy } from 'react';
+import React, { Fragment, Suspense } from 'react';
 import MasterLayout from '../components/masterLayout/MasterLayout';
 import LazyLoader from '../components/masterLayout/LazyLoader';
-const Complete = lazy(()=>import('../components/Complete/Complete'))
+import ForgetPass from '../components/ForgetPass/ForgetPass';
 
-const CompletePage = () => {
+const ForgotPassPage = () => {
     return (
         <Fragment>
             <MasterLayout>
                 <Suspense fallback ={LazyLoader}>
 
-                <Complete></Complete>
+               <ForgetPass></ForgetPass>
 
                 </Suspense>
                
@@ -18,4 +18,4 @@ const CompletePage = () => {
     );
 };
 
-export default CompletePage;
+export default ForgotPassPage;

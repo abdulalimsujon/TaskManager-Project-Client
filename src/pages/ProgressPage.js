@@ -1,17 +1,15 @@
 import React, { Fragment, Suspense, lazy } from 'react';
 import MasterLayout from '../components/masterLayout/MasterLayout';
 import LazyLoader from '../components/masterLayout/LazyLoader';
-const Cancel = lazy(()=>import('../components/cancel/Cancel'))
+const Progress = lazy(()=>import('../components/Progress/Progress.js'))
 
-
-const CancelPage = () => {
+const ProgressPage = () => {
     return (
         <Fragment>
         <MasterLayout>
             <Suspense fallback={<LazyLoader></LazyLoader>}>
 
-            <Cancel></Cancel>
-
+         <Progress></Progress>
             </Suspense>
          
         </MasterLayout>
@@ -19,4 +17,4 @@ const CancelPage = () => {
     );
 };
 
-export default CancelPage;
+export default ProgressPage;

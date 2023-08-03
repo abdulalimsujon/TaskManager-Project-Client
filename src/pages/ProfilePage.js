@@ -1,16 +1,15 @@
 import React, { Fragment, Suspense, lazy } from 'react';
 import MasterLayout from '../components/masterLayout/MasterLayout';
 import LazyLoader from '../components/masterLayout/LazyLoader';
-const Cancel = lazy(()=>import('../components/cancel/Cancel'))
+const Profile = lazy(()=>import('../components/Profile/Profile'))
 
-
-const CancelPage = () => {
+const ProfilePage = () => {
     return (
         <Fragment>
         <MasterLayout>
             <Suspense fallback={<LazyLoader></LazyLoader>}>
-
-            <Cancel></Cancel>
+         <Profile></Profile>
+            
 
             </Suspense>
          
@@ -19,4 +18,4 @@ const CancelPage = () => {
     );
 };
 
-export default CancelPage;
+export default ProfilePage;
