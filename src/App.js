@@ -11,6 +11,8 @@ import ForgotPassPage from "./pages/ForgotPassPage";
 import RegisterPage from "./pages/RegisterPage";
 import ProgressPage from "./pages/ProgressPage";
 import LoginPage from "./pages/LoginPage";
+import { Toaster } from "react-hot-toast";
+
 
 
 
@@ -20,7 +22,9 @@ function App() {
   return (
     <div className="App">
 
-      <Fragment>
+        <Toaster />
+
+      
         <BrowserRouter>
         <Routes>
 
@@ -38,10 +42,12 @@ function App() {
 
 
         </Routes>
+    
         </BrowserRouter>
 
         <FullScreenLayout></FullScreenLayout>
-      </Fragment>
+        
+      
       
     </div>
   );

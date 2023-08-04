@@ -1,12 +1,53 @@
 import Link from 'antd/es/typography/Link';
-import React, { useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
+// import { IsEmail, IsEmpty, IsMobile} from '../../helper/formHelper';
+import { Toaster, toast } from 'react-hot-toast';
+import { RegistrationRequest } from '../../APIRequest/APIRequest';
+
 
 
 const Register = () => {
 
     let emailRef,firstNameRef,lastNameRef,MobileRef,PasswordRef = useRef();
     let navigate=useNavigate();
+
+    const OnRegistration = async()=>{
+        const email = emailRef.value;
+        const firstName = firstNameRef.value;
+        const lastName = lastNameRef.value;
+        const mobile = MobileRef.value;
+        const password = PasswordRef.value;
+        const photo = ""
+
+        // if(IsEmail(email)){
+        //     toast("Valid Email is required !")
+        // }
+        // if(IsEmpty(firstName)){
+        //     window.alert("Name is Required!") 
+        // }
+        //  if(IsEmpty(lastName)){
+        //     window.alert("Last Name is required")
+        // }
+        // if(IsEmpty(password)){
+        //     window.alert("Password is Required")
+        // }
+        //  if(IsMobile(mobile)){
+        //     window.alert("Valid mobile is required")
+        // }
+        try{
+
+           await RegistrationRequest(email,firstName,lastName,mobile,password,photo)
+
+        }catch(error){
+            console.log(error)
+        }
+     
+
+            
+   
+
+    }
     return (
         <div className="container">
             <div className="row justify-content-center ">
@@ -39,6 +80,8 @@ const Register = () => {
                                     <input ref={(input)=>PasswordRef=input} className="form-control animated fadeInUp" type="password"></input>
                                     <hr/>
 
+                                    <button className='btn-primary animated fadeInUp' onClick={OnRegistration}>Next</button>
+
                                   
                                     <div className="text-center w-100">
                                     <Link className='text-center animated fadeInUp' onClick = {()=>{navigate('/login')}}>Login</Link>
@@ -59,7 +102,7 @@ const Register = () => {
 
                 </div>
             </div>
-
+            <Toaster />
         </div>
     );
 };
