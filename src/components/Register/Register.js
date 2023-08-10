@@ -1,11 +1,9 @@
 import Link from 'antd/es/typography/Link';
-import React, { useEffect, useRef } from 'react';
+import React, {  useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
-// import { IsEmail, IsEmpty, IsMobile} from '../../helper/formHelper';
-import { Toaster, toast } from 'react-hot-toast';
+import { ErrorToast, IsEmail, IsEmpty, IsMobile} from '../../helper/formHelper';
+import { Toaster } from 'react-hot-toast';
 import { RegistrationRequest } from '../../APIRequest/APIRequest';
-
-
 
 const Register = () => {
 
@@ -20,32 +18,35 @@ const Register = () => {
         const password = PasswordRef.value;
         const photo = ""
 
-        // if(IsEmail(email)){
-        //     toast("Valid Email is required !")
-        // }
-        // if(IsEmpty(firstName)){
-        //     window.alert("Name is Required!") 
-        // }
-        //  if(IsEmpty(lastName)){
-        //     window.alert("Last Name is required")
-        // }
-        // if(IsEmpty(password)){
-        //     window.alert("Password is Required")
-        // }
-        //  if(IsMobile(mobile)){
-        //     window.alert("Valid mobile is required")
-        // }
+        if(IsEmail(email)){
+            ErrorToast("Valid Email is required !")
+        }
+        if(IsEmpty(firstName)){
+            ErrorToast("Name is Required!") 
+        }
+         if(IsEmpty(lastName)){
+            ErrorToast("Last Name is required")
+        }
+        if(IsEmpty(password)){
+            ErrorToast("Password is Required")
+        }
+         if(!IsMobile(mobile)){
+            ErrorToast("Valid mobile is required")
+        }
         try{
 
-           await RegistrationRequest(email,firstName,lastName,mobile,password,photo)
+            if((!IsEmpty(firstName)) && (!IsEmpty(lastName)) && (!IsEmail(email)) && (IsMobile(mobile))){
 
+                await RegistrationRequest(email,firstName,lastName,mobile,password,photo)
+                navigate('/')
+
+            }
+
+            
         }catch(error){
             console.log(error)
         }
      
-
-            
-   
 
     }
     return (
@@ -80,11 +81,11 @@ const Register = () => {
                                     <input ref={(input)=>PasswordRef=input} className="form-control animated fadeInUp" type="password"></input>
                                     <hr/>
 
-                                    <button className='btn-primary animated fadeInUp' onClick={OnRegistration}>Next</button>
+                                    <button className='form-control btn-primary animated fadeInUp' onClick={OnRegistration}>Next</button>
 
                                   
                                     <div className="text-center w-100">
-                                    <Link className='text-center animated fadeInUp' onClick = {()=>{navigate('/login')}}>Login</Link>
+                                    <Link className='text-center animated fadeInUp' onClick = {()=>{navigate('/')}}>Login</Link>
                                     <br/>
                                     <Link className='text-center animated fadeInUp' onClick={()=>{navigate('/forget')}}>Forget Password</Link>
                                     <br/>

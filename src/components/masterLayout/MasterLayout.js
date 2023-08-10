@@ -6,6 +6,7 @@ import {BsHourglass, BsListNested} from "react-icons/bs";
 
 import {AiOutlineCheckCircle, AiOutlineEdit, AiOutlineLogout, AiOutlineMenuUnfold, AiOutlineUser} from "react-icons/ai";
 import { NavLink } from 'react-router-dom';
+import { removeSession } from '../../helper/SessionHelper';
 
 const MasterLayout = (props) => {
 
@@ -30,6 +31,10 @@ const MasterLayout = (props) => {
             content.classList.add("content");
         }
     };
+
+    const logout =()=>{
+        removeSession();
+    }
     return (
      <Fragment>
 
@@ -57,7 +62,7 @@ const MasterLayout = (props) => {
                                 </NavLink>
                                 <a className="side-bar-item">
                                     <AiOutlineLogout className="side-bar-item-icon" />
-                                    <span className="side-bar-item-caption">Logout</span>
+                                    <span onClick = {logout} className="side-bar-item-caption">Logout</span>
                                 </a>
                             </div>
                         </div>

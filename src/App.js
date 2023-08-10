@@ -1,4 +1,4 @@
-import { Fragment } from "react";
+
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Newpage from "./pages/Newpage";
 import CompletePage from "./pages/CompletePage";
@@ -10,47 +10,76 @@ import DashboardPage from "./pages/DashboardPage";
 import ForgotPassPage from "./pages/ForgotPassPage";
 import RegisterPage from "./pages/RegisterPage";
 import ProgressPage from "./pages/ProgressPage";
-import LoginPage from "./pages/LoginPage";
 import { Toaster } from "react-hot-toast";
+import LoginPage from "./pages/LoginPage";
+import NotFound from "./components/NotFound";
+import { getToken } from "./helper/SessionHelper";
 
-
-
-
- 
 
 function App() {
-  return (
-    <div className="App">
 
-        <Toaster />
+  if(getToken()){
 
-      
-        <BrowserRouter>
-        <Routes>
+    return (
 
-          <Route exact path='/' element={<DashboardPage></DashboardPage>}></Route>
-          <Route exact path='/Create' element={<CreatePages></CreatePages>}></Route>
-          <Route exact path='/new' element={<Newpage></Newpage>}></Route>
-          <Route exact path='/progress' element={<ProgressPage></ProgressPage>}></Route>
-          <Route exact path='/complete' element={<CompletePage></CompletePage>}></Route>
-          <Route exact path='/cancel' element={<CancelPage></CancelPage>}></Route>
-          <Route exact path='/profile' element={<Profile></Profile>}></Route>
-          <Route exact path='/register' element={<RegisterPage></RegisterPage>}></Route>
-          <Route exact path='/forget' element={<ForgotPassPage></ForgotPassPage>}></Route>
-          <Route exact path='/login' element={<LoginPage></LoginPage>}></Route>
-          <Route exact path='*' element={<page404></page404>}></Route>
-
-
-        </Routes>
-    
-        </BrowserRouter>
-
-        <FullScreenLayout></FullScreenLayout>
+      <div className="App">
+          <Toaster />     
+          <BrowserRouter>
+          <Routes>
+            <Route exact path='/' element={<DashboardPage></DashboardPage>}></Route>
+            <Route exact path='/Create' element={<CreatePages></CreatePages>}></Route>
+            <Route exact path='/new' element={<Newpage></Newpage>}></Route>
+            <Route exact path='/progress' element={<ProgressPage></ProgressPage>}></Route>
+            <Route exact path='/complete' element={<CompletePage></CompletePage>}></Route>
+            <Route exact path='/cancel' element={<CancelPage></CancelPage>}></Route>
+            <Route exact path='/profile' element={<Profile></Profile>}></Route>
+            <Route exact path='/forget' element={<ForgotPassPage></ForgotPassPage>}></Route>
+            
         
+        <Route exact path='/register' element={<RegisterPage></RegisterPage>}></Route>
+        <Route exact path='*' element={<NotFound></NotFound>}></Route>
+          </Routes>
       
+          </BrowserRouter>
+  
+          <FullScreenLayout></FullScreenLayout>
+          
+        
+        
+      </div>
+    );
+
+  }else{
+
+    return (
+
+      <div className="App">
+          <Toaster />     
+          <BrowserRouter>
+          <Routes>
+         <Route exact  path='/' element={<LoginPage></LoginPage>}></Route>
+        <Route exact path='/register' element={<RegisterPage></RegisterPage>}></Route>
+        <Route exact path='*' element={<NotFound></NotFound>}></Route>
+          </Routes>
       
-    </div>
-  );
-}
+          </BrowserRouter>
+  
+          <FullScreenLayout></FullScreenLayout>
+                
+      </div>
+    );
+
+
+
+  }
+  
+  
+
+
+
+
+ }
+
+
 
 export default App;
