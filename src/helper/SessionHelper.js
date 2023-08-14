@@ -13,7 +13,7 @@ class SessionHelper {
     }
 
     getUserDetails(){
-       return  localStorage.getItem(JSON.parse("UserDetails"))
+       return  JSON.parse(localStorage.getItem("UserDetails"))
     }
 
 

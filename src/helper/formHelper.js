@@ -2,9 +2,6 @@ import { toast } from "react-hot-toast";
 
 
 
-
- 
-
 let EmailRegx = /\S+@\S+\.\S+/;
 let MobileRegx = /(^(\+88|0088)?(01){1}[3456789]{1}(\d){8})$/;
 
@@ -30,14 +27,14 @@ class FormHelper {
     }
 
 
-    getBase64(file) {
-        return new Promise((resolve, reject) => {
-            const reader = new FileReader();
-            reader.readAsDataURL(file);
-            reader.onload = () => resolve(reader.result);
-            reader.onerror = (error) => reject(error);
-        });
-    }
+    // getBase64(file) {
+    //     return new Promise((resolve, reject) => {
+    //         const reader = new FileReader();
+    //         reader.readAsDataURL(file);
+    //         reader.onload = () => resolve(reader.result);
+    //         reader.onerror = (error) => reject(error);
+    //     });
+    // }
 
 
 }

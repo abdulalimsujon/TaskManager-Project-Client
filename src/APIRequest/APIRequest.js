@@ -6,12 +6,9 @@ import {  getToken, setToken, setUserDetails} from "../helper/SessionHelper";
 import { ErrorToast, SuccessToast } from "../helper/formHelper";
 import { CancelTask, CompleteTask, NewTask, ProgressTask } from "../redux/stateSlice/TaskSlice";
 import { setSummary } from "../redux/stateSlice/summary-slice";
+import { SetProfile } from "../redux/stateSlice/profileSlice";
 
-
-
-
-
-
+const axiosHeader = {headers:{"token":getToken()}}
 
 export function  RegistrationRequest (email,firstName,lastName,mobile,password,photo){
 
@@ -212,3 +209,58 @@ export function LoginRequest(email,password){
     });
 }
 
+//------------------>get user details------------------------>
+
+
+export function getProfileDetails(){
+    store.dispatch(showLoader())
+    let URL="http://localhost:5000/api/v1/profileDetail";
+
+    axios.get(URL,axiosHeader).then((res)=>{
+        store.dispatch(hideLoader())
+
+        if(res.error){
+
+            ErrorToast("Something Went Wrong")
+            
+        }
+        else{
+            store.dispatch(hideLoader())
+
+            store.dispatch(SetProfile(res.data['data'][0]))
+          
+        }
+    }).catch((err)=>{
+        ErrorToast("Something Went Wrong")
+        store.dispatch(hideLoader())
+    });
+}
+
+
+///////////////--------------------update profile------------------>
+
+export function updateProfile(firstName,lastName,mobile){
+    
+    store.dispatch(showLoader())
+    let url = "http://localhost:5000/api/v1/profileUpdate";
+  
+
+  return  axios.post(url,{
+        firstName,
+        lastName,
+        mobile
+    },axiosHeader).then((res)=>{
+        store.dispatch(hideLoader())
+        if(res.data?.error){
+            ErrorToast(res.data.error)
+            return false
+        }else{
+            store.dispatch(hideLoader())
+            SuccessToast('successfully updated')
+            return true
+        }
+    }).catch((error)=>{
+        store.dispatch(hideLoader())
+        ErrorToast("something went wrong")
+    })
+}

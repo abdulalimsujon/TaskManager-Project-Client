@@ -1,14 +1,14 @@
 import React, { useEffect } from 'react';
 import { TaskStatusCount } from '../APIRequest/APIRequest';
 import { useSelector } from 'react-redux';
-import { getToken } from '../helper/SessionHelper';
+
 
 
 
 const Dashboard = () => {
 
     const statusCount = useSelector((state)=>state.summary.value)
-    const axiosHeader = {headers:{"token":getToken()}}
+
 
 useEffect(()=>{
 
