@@ -239,17 +239,13 @@ export function getProfileDetails(){
 
 ///////////////--------------------update profile------------------>
 
-export function updateProfile(firstName,lastName,mobile){
+export function updateProfile(reqBody){
     
     store.dispatch(showLoader())
     let url = "http://localhost:5000/api/v1/profileUpdate";
   
 
-  return  axios.post(url,{
-        firstName,
-        lastName,
-        mobile
-    },axiosHeader).then((res)=>{
+  return  axios.post(url,reqBody,axiosHeader).then((res)=>{
         store.dispatch(hideLoader())
         if(res.data?.error){
             ErrorToast(res.data.error)

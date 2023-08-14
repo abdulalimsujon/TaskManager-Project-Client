@@ -18,6 +18,8 @@ const Profile = () => {
 
     const profileData = useSelector((state)=>state.Profile.value)
 
+    console.log(profileData)
+
     const previewImage = () => {
         let ImgFile =ImageRef.files[0];
         getBase64(ImgFile).then((base64Img)=>{
@@ -33,23 +35,26 @@ useEffect(()=>{
 
 const updateMyProfile =()=>{
 
-  
-
     let email=emailRef.value;
     let firstName=firstNameRef.value;
     let lastName=lastNameRef.value;
     let mobile=mobileNumRef.value;
-    // let photo=ImageRef.src
+    let photo=ImageRef.src;
 
-    // const postBody = {
-    //     email,
-    //     firstName,
-    //     lastName,
-    //     mobile
+   
+
+    const reqBody = {
+
+        firstName,
+        lastName,
+        mobile,
+        photo
+
+    }
+
     
-    // }
 
-    updateProfile(firstName,lastName,mobile).then((result)=>{
+    updateProfile(reqBody).then((result)=>{
         if(result===true){
             navigate("/")
         }
@@ -67,13 +72,13 @@ const updateMyProfile =()=>{
    <div className='container'>
     <div className="row d-flex justify-content-center">
         <div className="col-md-12">
-            <img className='icon-nav-img-lg' src={profileData.image}></img>
+            <img className='icon-nav-img-lg' src={profileData.photo}></img>
             <hr></hr>
 
             <div className="row">
              <div className="col-md-4 mt-2">
 
-             <input onClick ={previewImage} ref={(input)=>ImageRef=input}className = "form-control  animated fadeInUp"  type="file"  />
+             <input onChange ={previewImage} ref={(input)=>ImageRef=input}className = "form-control  animated fadeInUp"  type="file"  />
 
              </div>
 
