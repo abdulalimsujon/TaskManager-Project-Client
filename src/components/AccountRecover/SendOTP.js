@@ -1,11 +1,13 @@
 import React, { useRef } from 'react';
 import { ErrorToast, IsEmail } from '../../helper/formHelper';
 import { RecoverVerifyEmailRequest } from '../../APIRequest/APIRequest';
+import { useNavigate } from 'react-router-dom';
 
 const SendOTP = () => {
 
 
     let emailRef = useRef()
+    const navigate = useNavigate()
 
 
   const verifyEmail=()=>{
@@ -15,7 +17,13 @@ const SendOTP = () => {
         ErrorToast("Valid Email is Required")
     }else{
 
-        RecoverVerifyEmailRequest(email).then((res)=>{
+        RecoverVerifyEmailRequest(email).then((result)=>{
+
+            if(result===true){
+
+                navigate("/VerifyOTP")
+
+            }
 
         })
 

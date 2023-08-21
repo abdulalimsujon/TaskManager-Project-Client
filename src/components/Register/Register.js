@@ -86,9 +86,7 @@ const Register = () => {
                                   
                                     <div className="text-center w-100">
                                     <Link className='text-center animated fadeInUp' onClick = {()=>{navigate('/')}}>Login</Link>
-                                    <br/>
-                                    <Link className='text-center animated fadeInUp' onClick={()=>{navigate('/forget')}}>Forget Password</Link>
-                                    <br/>
+                                  
 
 
                                 </div>

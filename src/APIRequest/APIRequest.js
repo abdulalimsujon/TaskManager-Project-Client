@@ -2,7 +2,7 @@ import axios from "axios";
 import { toast } from "react-hot-toast";
 import store from "../redux/store/store";
 import { hideLoader, showLoader } from "../redux/stateSlice/setting-slice";
-import {  getToken, setToken, setUserDetails} from "../helper/SessionHelper";
+import {  getToken, setEmail, setOTP, setToken, setUserDetails} from "../helper/SessionHelper";
 import { ErrorToast, SuccessToast } from "../helper/formHelper";
 import { CancelTask, CompleteTask, NewTask, ProgressTask } from "../redux/stateSlice/TaskSlice";
 import { setSummary } from "../redux/stateSlice/summary-slice";
@@ -266,19 +266,34 @@ export function updateProfile(reqBody){
 export function RecoverVerifyEmailRequest(email){
     store.dispatch(showLoader)
 
-    let url = "http://localhost:5000/api/v1/VerifyEmailRecoveryRequest/" + email;
+    let url = "http://localhost:5000/api/v1/RecoverVerifyEmail/" + email;
 
     return axios.get(url).then((res)=>{
 
         store.dispatch(hideLoader)
 
         if(res.status===200){
-            return true
+
+            if(res.data.status==="fail"){
+                ErrorToast("No user found")
+                return false
+            }else{
+
+                setEmail(email)
+                SuccessToast("6 digits code send to your email")
+                return true;
+
+            }
+        
         }else{
+            store.dispatch(hideLoader)
+            
             ErrorToast("something went wrong")
+            return false
         }
 
     }).catch((error)=>{
+        store.dispatch(hideLoader)
         ErrorToast("something went wrong")
     })
 
@@ -289,14 +304,23 @@ export function RecoverVerifyEmailRequest(email){
 export function RecoverVerifyOTPRequest(email,OTP){
     store.dispatch(showLoader)
 
-    let url = "http://localhost:5000/api/v1/VerifyOTPRecoveryRequest/" + email+ "/"+ OTP;
+    let url = "http://localhost:5000/api/v1/RecoverVerifyOTP/"+email+ "/"+ OTP;
 
     return axios.get(url).then((res)=>{
 
         store.dispatch(hideLoader)
 
         if(res.status===200){
-            return true
+           if(res.data.status==="fail"){
+            ErrorToast("No user found");
+            return false ;
+           }else{
+            setOTP(OTP)
+
+            SuccessToast("code verification success")
+
+            return true;
+           }
         }else{
             ErrorToast("something went wrong")
         }
@@ -306,31 +330,35 @@ export function RecoverVerifyOTPRequest(email,OTP){
     })
 
 }
-///////------------------>Recover Verify OTP request-------->
+///////------------------>password change -------->
 
-export function RecoverResetPassword(email,OTP,password){
+export function RecoverResetPassword(reqBody){
     store.dispatch(showLoader)
 
-    const postBody = {
-        email:email,
-        OTP:OTP,
-        password:password
-    }
+  
+    let url = "http://localhost:5000/api/v1/RecoverResetPassword";
 
-    let url = "http://localhost:5000/api/v1/RecoverResetPassword/" +email+ "/"+ OTP;
-
-    return axios.post(url,postBody).then((res)=>{
+    return axios.post(url,reqBody).then((res)=>{
 
         store.dispatch(hideLoader)
 
-        if(res.status===200){
-            return true
+        console.log("dsfhjkdf====>res",res.data)
+
+        if(res.data.status==="success"){
+
+            SuccessToast("successfully change the password")
+            return true;
+
+         
         }else{
-            ErrorToast("something went wrong")
+
+            return false;
+
         }
 
     }).catch((error)=>{
         ErrorToast("something went wrong")
+        return false;
     })
 
 }

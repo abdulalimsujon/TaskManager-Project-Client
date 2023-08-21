@@ -1,15 +1,21 @@
 import React, { useRef } from 'react';
 import { ErrorToast, IsEmpty } from '../../helper/formHelper';
 import { RecoverResetPassword } from '../../APIRequest/APIRequest';
+import { getEmail, getOTP } from '../../helper/SessionHelper';
+import { useNavigate } from 'react-router-dom';
 
 const CreatePassword = () => {
 
     let  passRef ,confirmPasswordRef = useRef();
 
+    const navigate = useNavigate()
+
     const setPassword = ()=>{
 
         const password = passRef.value;
         const confirmPassword = confirmPasswordRef.value;
+
+        
         if(IsEmpty(password)){
 
             ErrorToast("Password Required")
@@ -21,7 +27,20 @@ const CreatePassword = () => {
             ErrorToast("Password and confirm password should be same")
         }else{
 
-            RecoverResetPassword().then((res)=>{
+            const reqBody ={
+                email:getEmail(),
+                otp:getOTP(),
+                password:password
+            }
+
+
+            RecoverResetPassword(reqBody).then((res)=>{
+
+                console.log(res)
+
+                if(res === true){
+                    navigate("/")
+                }
                 
             })
 
@@ -39,6 +58,8 @@ const CreatePassword = () => {
                                 <h3> Create Password</h3>
                                 <hr/>
                                 <label>Your Email</label>
+                                <input value ={getEmail()} ref = {(input)=>passRef=input } type="email" className='form-control animated fadeInUp'/>
+                                <br/>
                                 <input ref = {(input)=>passRef=input }placeholder='Enter your password' type="email" className='form-control animated fadeInUp'/>
                                 <br/>
                                 <input ref = {(input)=>confirmPasswordRef=input }placeholder='confirm your password' type="email" className='form-control animated fadeInUp'/>

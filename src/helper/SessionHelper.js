@@ -40,4 +40,4 @@ class SessionHelper {
 }
 
 
-export const {setToken,getToken,setUserDetails,getUserDetails,removeSession} = new SessionHelper();
+export const {setToken,getToken,setUserDetails,getUserDetails,removeSession,setEmail,getEmail,getOTP,setOTP} = new SessionHelper();
