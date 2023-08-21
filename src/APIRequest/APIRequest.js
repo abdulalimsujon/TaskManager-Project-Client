@@ -260,3 +260,79 @@ export function updateProfile(reqBody){
         ErrorToast("something went wrong")
     })
 }
+
+///----------------------verify email recovery--------------->
+
+export function RecoverVerifyEmailRequest(email){
+    store.dispatch(showLoader)
+
+    let url = "http://localhost:5000/api/v1/VerifyEmailRecoveryRequest/" + email;
+
+    return axios.get(url).then((res)=>{
+
+        store.dispatch(hideLoader)
+
+        if(res.status===200){
+            return true
+        }else{
+            ErrorToast("something went wrong")
+        }
+
+    }).catch((error)=>{
+        ErrorToast("something went wrong")
+    })
+
+}
+
+///////------------------>Recover Verify OTP request-------->
+
+export function RecoverVerifyOTPRequest(email,OTP){
+    store.dispatch(showLoader)
+
+    let url = "http://localhost:5000/api/v1/VerifyOTPRecoveryRequest/" + email+ "/"+ OTP;
+
+    return axios.get(url).then((res)=>{
+
+        store.dispatch(hideLoader)
+
+        if(res.status===200){
+            return true
+        }else{
+            ErrorToast("something went wrong")
+        }
+
+    }).catch((error)=>{
+        ErrorToast("something went wrong")
+    })
+
+}
+///////------------------>Recover Verify OTP request-------->
+
+export function RecoverResetPassword(email,OTP,password){
+    store.dispatch(showLoader)
+
+    const postBody = {
+        email:email,
+        OTP:OTP,
+        password:password
+    }
+
+    let url = "http://localhost:5000/api/v1/RecoverResetPassword/" +email+ "/"+ OTP;
+
+    return axios.post(url,postBody).then((res)=>{
+
+        store.dispatch(hideLoader)
+
+        if(res.status===200){
+            return true
+        }else{
+            ErrorToast("something went wrong")
+        }
+
+    }).catch((error)=>{
+        ErrorToast("something went wrong")
+    })
+
+}
+
+

@@ -1,12 +1,11 @@
 import React, { Fragment,useRef } from 'react';
 
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 import { hideLoader, showLoader } from '../../redux/stateSlice/setting-slice';
 import store from '../../redux/store/store';
-import { ErrorToast, SuccessToast } from '../../helper/formHelper';
+import { ErrorToast} from '../../helper/formHelper';
 import { setToken, setUserDetails } from '../../helper/SessionHelper';
-import { LoginRequest } from '../../APIRequest/APIRequest';
 import axios from 'axios';
 
 
@@ -20,7 +19,6 @@ const Login = () => {
 
 
     const OnLogin=async(req,res)=>{
-
 
         try{
 
@@ -36,6 +34,8 @@ const Login = () => {
           const {data} = await axios.post(url,PostBody)
     
           store.dispatch(hideLoader())
+
+          console.log(data)
     
           setToken(data.token)
           setUserDetails(data.data)
@@ -55,10 +55,7 @@ const Login = () => {
             
             console.log("something went wrong");
         }
-       
-   
-
-      
+            
 
     }
     

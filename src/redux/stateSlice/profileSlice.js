@@ -6,7 +6,7 @@ const ProfileSlice = createSlice({
 
     name:"Profile",
     initialState:{
-        value:['abdul alim']
+        value:[]
     },
     reducers:{
         SetProfile:(state,action)=>{

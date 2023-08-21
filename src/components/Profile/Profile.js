@@ -2,11 +2,9 @@ import React, {  useEffect, useRef } from 'react';
 
 import { useSelector } from 'react-redux';
 import { getProfileDetails, updateProfile } from '../../APIRequest/APIRequest';
-import { ErrorToast, SuccessToast, getBase64 } from '../../helper/formHelper';
-import axios from 'axios';
-import { getToken } from '../../helper/SessionHelper';
-import store from '../../redux/store/store';
-import { hideLoader, showLoader } from '../../redux/stateSlice/setting-slice';
+import { getBase64 } from '../../helper/formHelper';
+
+
 import { useNavigate } from 'react-router-dom';
 
 
@@ -66,7 +64,6 @@ const updateMyProfile =()=>{
     
     
 }
-
 
     return (
    <div className='container'>

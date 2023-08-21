@@ -14,6 +14,9 @@ import { Toaster } from "react-hot-toast";
 import LoginPage from "./pages/LoginPage";
 import NotFound from "./components/NotFound";
 import { getToken } from "./helper/SessionHelper";
+import SendOTPpage from "./pages/SendOTPpage";
+import VerifyOTPpage from "./pages/VerifyOTPpage";
+import CreatePasswordPage from "./pages/CreatePasswordPage";
 
 
 function App() {
@@ -34,10 +37,10 @@ function App() {
             <Route exact path='/cancel' element={<CancelPage></CancelPage>}></Route>
             <Route exact path='/profile' element={<Profile></Profile>}></Route>
             <Route exact path='/forget' element={<ForgotPassPage></ForgotPassPage>}></Route>
-            
-        
-        <Route exact path='/register' element={<RegisterPage></RegisterPage>}></Route>
-        <Route exact path='*' element={<NotFound></NotFound>}></Route>
+            <Route exact  path='/SendOTP' element={<SendOTPpage></SendOTPpage>}></Route>
+            <Route exact  path='/VerifyOTP' element={<VerifyOTPpage></VerifyOTPpage>}></Route>    
+            <Route exact path='/register' element={<RegisterPage></RegisterPage>}></Route>
+            <Route exact path='*' element={<NotFound></NotFound>}></Route>
           </Routes>
       
           </BrowserRouter>
@@ -58,6 +61,8 @@ function App() {
           <BrowserRouter>
           <Routes>
          <Route exact  path='/' element={<LoginPage></LoginPage>}></Route>
+      
+         <Route exact  path='/CreatePassword' element={<CreatePasswordPage></CreatePasswordPage>}></Route>
         <Route exact path='/register' element={<RegisterPage></RegisterPage>}></Route>
         <Route exact path='*' element={<NotFound></NotFound>}></Route>
           </Routes>

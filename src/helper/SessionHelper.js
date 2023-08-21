@@ -7,6 +7,19 @@ class SessionHelper {
         return localStorage.getItem('token')
     }
     
+    setEmail(email){
+        localStorage.setItem("email",email)
+    }
+
+    getEmail(email){
+        return localStorage.getItem('email')
+    }
+    setOTP(OTP){
+        localStorage.setItem('OTP',OTP)
+    }
+    getOTP(){
+        return localStorage.getItem("OTP")
+    }
     setUserDetails(UserDetails){
         localStorage.setItem("UserDetails",JSON.stringify(UserDetails))
 
@@ -21,9 +34,8 @@ class SessionHelper {
         localStorage.clear()
         window.location.href="/"
     }
-    // AxiosHeader(){
-    //     return {headers:{"token":getToken()}}
-    // }
+    
+
 
 }
 
